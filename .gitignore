@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Cache modeli Hugging Face
+.hf_cache/
+
+# Pliki tymczasowe pakietu Office (blokady otwartych dokumentów)
+~$*
+
+# System
+.DS_Store
+
+# Inne
+results/*
+!results/*.md

@@ -1,0 +1,2 @@
+{"model_name": "mini", "test_id": "t1", "seed": 1, "status": "ok", "duration_sec": 1.0, "throughput_img_s": 0.5, "avg_gpu_util": null, "avg_gpu_memory_percent": null}
+{"model_name": "mini", "test_id": "t1", "seed": 2, "status": "error", "duration_sec": 0.0, "throughput_img_s": 0.0, "avg_gpu_util": null, "avg_gpu_memory_percent": null}

@@ -1,0 +1,7 @@
+services:
+  model-benchmark:
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    group_add:
+      - video

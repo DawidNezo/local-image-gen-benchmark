@@ -1,0 +1,16 @@
+services:
+  model-benchmark:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: model-benchmark:latest
+    working_dir: /app
+    environment:
+      - HF_HOME=/app/.hf_cache
+    volumes:
+      - ./:/app
+      - hf-cache:/app/.hf_cache
+    command: ["validate", "--config", "config.example.json"]
+
+volumes:
+  hf-cache:

@@ -1,0 +1,93 @@
+{
+  "output_dir": "results",
+  "device": "auto",
+  "save_images": true,
+  "models": [
+    {
+      "name": "sana-sprint-0.6b",
+      "model_id": "Efficient-Large-Model/Sana_Sprint_0.6B_1024px_diffusers",
+      "model_path": null,
+      "dtype": "bfloat16",
+      "variant": null,
+      "use_safetensors": true,
+      "steps": 2,
+      "guidance_scale": 4.5,
+      "enable_attention_slicing": true,
+      "enable_vae_tiling": true
+    },
+    {
+      "name": "sdxl-turbo",
+      "model_id": "stabilityai/sdxl-turbo",
+      "model_path": null,
+      "dtype": "float16",
+      "variant": "fp16",
+      "use_safetensors": true,
+      "steps": 4,
+      "guidance_scale": 0.0,
+      "enable_attention_slicing": true,
+      "enable_vae_tiling": true
+    },
+    {
+      "name": "sana-1.6b",
+      "model_id": "Efficient-Large-Model/Sana_1600M_1024px_BF16_diffusers",
+      "model_path": null,
+      "dtype": "bfloat16",
+      "variant": "bf16",
+      "use_safetensors": true,
+      "steps": 20,
+      "guidance_scale": 4.5,
+      "enable_attention_slicing": true,
+      "enable_vae_tiling": true
+    },
+    {
+      "name": "lumina-2",
+      "model_id": "Alpha-VLLM/Lumina-Image-2.0",
+      "model_path": null,
+      "dtype": "bfloat16",
+      "variant": null,
+      "use_safetensors": true,
+      "steps": 24,
+      "guidance_scale": 4.0,
+      "enable_attention_slicing": true,
+      "enable_vae_tiling": true
+    }
+  ],
+  "tests": [
+    {
+      "id": "s1-fotorealizm-portret",
+      "prompt": "A photorealistic close-up portrait of an elderly fisherman with a weathered face and grey beard, wearing a yellow raincoat, golden hour light, shallow depth of field, 85mm lens photograph",
+      "negative_prompt": "cartoon, illustration, painting, deformed face, extra fingers, blurry, low quality, watermark",
+      "width": 1024,
+      "height": 1024,
+      "steps": 20,
+      "guidance_scale": 4.5,
+      "scheduler": "default",
+      "seeds": [42, 43],
+      "num_images": 1
+    },
+    {
+      "id": "s2-zgodnosc-z-promptem",
+      "prompt": "A red bicycle leaning against a blue wooden door, a black cat sitting inside a wicker basket mounted on the handlebars, cobblestone street, soft morning light",
+      "negative_prompt": "",
+      "width": 1024,
+      "height": 1024,
+      "steps": 20,
+      "guidance_scale": 4.5,
+      "scheduler": "default",
+      "seeds": [42],
+      "num_images": 1
+    },
+    {
+      "id": "s3-styl-ilustracyjny",
+      "prompt": "An isometric illustration of a cozy floating island with a tiny lighthouse and waterfalls cascading into clouds, pastel colors, whimsical storybook style, highly detailed",
+      "negative_prompt": "photo, photorealistic, watermark, text, signature, low quality",
+      "width": 1024,
+      "height": 1024,
+      "steps": 20,
+      "guidance_scale": 4.5,
+      "scheduler": "default",
+      "seeds": [42],
+      "num_images": 1
+    }
+  ]
+}
