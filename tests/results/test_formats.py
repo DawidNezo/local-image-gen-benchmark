@@ -5,8 +5,12 @@ import json
 import re
 from pathlib import Path
 
-from domain import RunResult
-from outputs import write_outputs
+import pytest
+
+from imagebench.results import RunResult, write_outputs
+
+pytestmark = pytest.mark.unit
+
 
 EXPECTED_FIELDS = [
     "timestamp",

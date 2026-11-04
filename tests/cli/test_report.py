@@ -13,7 +13,8 @@ def test_report_from_sample_results(repo_root, sample_results_path, tmp_path) ->
     result = subprocess.run(
         [
             sys.executable,
-            "app.py",
+            "-m",
+            "imagebench",
             "report",
             "--input",
             str(sample_results_path),
@@ -50,7 +51,8 @@ def test_report_from_minimal_results(repo_root, minimal_results_path, tmp_path) 
     result = subprocess.run(
         [
             sys.executable,
-            "app.py",
+            "-m",
+            "imagebench",
             "report",
             "--input",
             str(minimal_results_path),

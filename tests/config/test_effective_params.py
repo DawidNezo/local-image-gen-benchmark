@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from domain import (
+import pytest
+
+from imagebench.config import (
     ExperimentConfig,
     ModelConfig,
     TestConfig,
@@ -8,6 +10,8 @@ from domain import (
     effective_steps,
     validate_config,
 )
+
+pytestmark = pytest.mark.unit
 
 
 def _test_cfg(steps: int = 30, guidance_scale: float = 7.5) -> TestConfig:

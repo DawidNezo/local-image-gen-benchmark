@@ -3,18 +3,16 @@ __pycache__/
 *.pyc
 .venv/
 .pytest_cache/
+.ruff_cache/
 .coverage
 htmlcov/
 
-# Cache modeli Hugging Face
+# Hugging Face model cache
 .hf_cache/
 
-# Pliki tymczasowe pakietu Office (blokady otwartych dokumentów)
-~$*
-
-# System
+# OS
 .DS_Store
 
-# Inne
+# Benchmark output (keep committed Markdown reports)
 results/*
 !results/*.md

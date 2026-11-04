@@ -1,7 +1,11 @@
 from __future__ import annotations
 
-from benchmark_runner import ModelRunner
-from domain import ModelConfig
+import pytest
+
+from imagebench.config import ModelConfig
+from imagebench.pipeline import ModelRunner
+
+pytestmark = pytest.mark.unit
 
 
 class FakePipelineWithoutNegativePrompt:

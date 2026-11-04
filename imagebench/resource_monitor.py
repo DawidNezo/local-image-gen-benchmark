@@ -1,3 +1,5 @@
+"""CPU/RAM/GPU sampling during a run, with GPU adapters for MPS, nvidia-smi and rocm-smi."""
+
 from __future__ import annotations
 
 import re
@@ -5,15 +7,61 @@ import shutil
 import subprocess
 import threading
 import time
+from dataclasses import dataclass
 from typing import Protocol
 
 import psutil
 
-from domain import ResourceSample
+
+@dataclass
+class ResourceSample:
+    timestamp: float
+    cpu_percent: float
+    ram_percent: float
+    gpu_util: float | None
+    gpu_memory_percent: float | None
+
+
+def _avg(values: list[float]) -> float | None:
+    return sum(values) / len(values) if values else None
+
+
+@dataclass(frozen=True)
+class ResourceStats:
+    """Average and peak usage over one run. GPU fields are None when the adapter reports nothing."""
+
+    avg_cpu: float = 0.0
+    max_cpu: float = 0.0
+    avg_ram: float = 0.0
+    max_ram: float = 0.0
+    avg_gpu_util: float | None = None
+    max_gpu_util: float | None = None
+    avg_gpu_mem: float | None = None
+    max_gpu_mem: float | None = None
+
+    @classmethod
+    def from_samples(cls, samples: list[ResourceSample]) -> ResourceStats:
+        if not samples:
+            return cls()
+        cpus = [s.cpu_percent for s in samples]
+        rams = [s.ram_percent for s in samples]
+        gpus = [s.gpu_util for s in samples if s.gpu_util is not None]
+        gpu_mems = [s.gpu_memory_percent for s in samples if s.gpu_memory_percent is not None]
+        return cls(
+            avg_cpu=sum(cpus) / len(cpus),
+            max_cpu=max(cpus),
+            avg_ram=sum(rams) / len(rams),
+            max_ram=max(rams),
+            avg_gpu_util=_avg(gpus),
+            max_gpu_util=max(gpus) if gpus else None,
+            avg_gpu_mem=_avg(gpu_mems),
+            max_gpu_mem=max(gpu_mems) if gpu_mems else None,
+        )
 
 
 class GpuAdapter(Protocol):
     def get_stats(self) -> tuple[float | None, float | None]:
+        """Return (GPU utilisation %, GPU memory %); None for what is not available."""
         ...
 
 
@@ -109,6 +157,7 @@ class RocmSmiGpuAdapter:
 
 
 def build_gpu_adapter(device: str, torch_module=None, subprocess_runner=None) -> GpuAdapter:
+    """CPU and `auto` get no GPU metrics; any other unknown name falls back to nvidia-smi."""
     device_name = device.lower().strip()
     if device_name in {"auto", "cpu"}:
         return NullGpuAdapter()
@@ -116,8 +165,6 @@ def build_gpu_adapter(device: str, torch_module=None, subprocess_runner=None) ->
         return MpsGpuAdapter(torch_module)
     if device_name == "rocm":
         return RocmSmiGpuAdapter(subprocess_runner)
-    if device_name == "null":
-        return NullGpuAdapter()
     return NvidiaSmiGpuAdapter(subprocess_runner)
 
 

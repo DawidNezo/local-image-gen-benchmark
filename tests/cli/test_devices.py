@@ -12,7 +12,8 @@ def test_devices_command(repo_root) -> None:
     result = subprocess.run(
         [
             sys.executable,
-            "app.py",
+            "-m",
+            "imagebench",
             "devices",
         ],
         cwd=repo_root,

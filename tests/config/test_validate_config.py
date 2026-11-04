@@ -1,6 +1,10 @@
 from __future__ import annotations
 
-from domain import ExperimentConfig, ModelConfig, TestConfig, validate_config
+import pytest
+
+from imagebench.config import ExperimentConfig, ModelConfig, TestConfig, validate_config
+
+pytestmark = pytest.mark.unit
 
 
 def _minimal_test() -> TestConfig:

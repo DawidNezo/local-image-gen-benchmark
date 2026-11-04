@@ -3,7 +3,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from outputs import TRACKED_PACKAGES, collect_environment_metadata, write_run_metadata
+import pytest
+
+from imagebench.metadata import TRACKED_PACKAGES, collect_environment_metadata, write_run_metadata
+
+pytestmark = pytest.mark.unit
 
 
 def test_collect_environment_metadata_contains_versions() -> None:

@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest>=8.0.0
+pytest-cov>=5.0.0
+# Pinned so a new ruff release cannot change the formatting.
+ruff==0.15.20

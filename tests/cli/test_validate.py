@@ -12,7 +12,8 @@ def test_validate_example_config(repo_root) -> None:
     result = subprocess.run(
         [
             sys.executable,
-            "app.py",
+            "-m",
+            "imagebench",
             "validate",
             "--config",
             "config.example.json",

@@ -1,0 +1,13 @@
+# Keep the build context small: the image only needs imagebench/, the requirements
+# and the example config. .hf_cache can hold tens of GB of model weights.
+.git
+.hf_cache
+.venv
+.pytest_cache
+.ruff_cache
+.coverage
+htmlcov
+**/__pycache__
+results
+tests
+*.md

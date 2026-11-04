@@ -13,7 +13,7 @@ WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 RUN python -m pip install --upgrade pip && python -m pip install -r /app/requirements.txt
 
-COPY app.py domain.py benchmark_runner.py orchestrator.py resource_monitor.py outputs.py /app/
+COPY imagebench/ /app/imagebench/
 COPY config.example.json /app/config.example.json
 
-ENTRYPOINT ["python", "app.py"]
+ENTRYPOINT ["python", "-m", "imagebench"]
